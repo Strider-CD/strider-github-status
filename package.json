@@ -1,0 +1,43 @@
+{
+  "name": "strider-email-notifier",
+  "version": "0.1.0",
+  "description": "Enables strider to email notifications based on certain events",
+  "main": "webapp.js",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha -R spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/microadam/strider-email-notifier.git"
+  },
+  "keywords": [
+    "strider",
+    "email",
+    "plugin"
+  ],
+  "author": "Adam Duncan <adam.jd@gmail.com>",
+  "license": "BSD",
+  "strider": {
+    "type": "job",
+    "id": "emailnotifier",
+    "title": "Email Notifier",
+    "webapp": "webapp.js",
+    "worker": "worker.js",
+    "config": {
+      "controller": "EmailNotifierCtrl"
+    }
+  },
+  "devDependencies": {
+    "jshint": "~2.3.0",
+    "mocha": "~1.13.0",
+    "expect.js": "~0.2.0"
+  },
+  "dependencies": {
+    "strider-mailer": "git+ssh://git@github.com:microadam/strider-mailer.git",
+    "async": "~0.2.9",
+    "bson": "~0.2.3",
+    "underscore": "~1.5.2",
+    "jade": "~0.35.0",
+    "moment": "~2.4.0"
+  }
+}

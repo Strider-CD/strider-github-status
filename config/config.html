@@ -1,0 +1,15 @@
+<div id="project_config_email_notifier" class="well">
+  <fieldset>
+    <legend>Email Notifier</legend>
+    <p>
+      By default, you will only recieve email notifications when the state of the build changes.
+      i.e it moves from a successful state to a failed state, or from a failed state to a successful state.
+      You can change this behaviour below.
+    </p>
+    <label class="checkbox">
+      <input type="checkbox" ng-model="config.always_notify" ng-change="changeAlwaysNotify()" />
+      Always send notification emails.
+    </label>
+    <p class="help-text">When set, you will always recieve notifications when a build completes, regardless of its state change.</p>
+  </fieldset>
+</div>
