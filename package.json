@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "description": "Enables strider to email notifications based on certain events",
   "main": "webapp.js",
+  "publishConfig": {
+    "registry": "http://registry.npmjs.org"
+  },
   "scripts": {
     "test": "./node_modules/.bin/mocha -R spec"
   },
