@@ -38,7 +38,6 @@
   "dependencies": {
     "strider-mailer": "git+ssh://git@github.com:microadam/strider-mailer.git",
     "async": "~0.2.9",
-    "bson": "~0.2.3",
     "underscore": "~1.5.2",
     "jade": "~0.35.0",
     "moment": "~2.4.0"

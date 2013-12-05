@@ -4,10 +4,14 @@ var expect = require('expect.js')
 
 describe('Email Notifier', function () {
 
-  function createContext(jobModelFunction, pluginConfig, sendState) {
+  function createContext(jobs, pluginConfig, sendState) {
     return {
       models:
-      { Job: { find: jobModelFunction }
+      { Job:
+        { find: function (a, b, c, callback) {
+            callback(null, jobs)
+          }
+        }
       , User: { collaborators: function (a, callback) { callback(null, [ { emailAddress: '' } ]) } }
       }
     , pluginConfig: pluginConfig
@@ -24,7 +28,7 @@ describe('Email Notifier', function () {
 
   function createJob(exitCode) {
     return {
-      _id: 1234
+      _id: '51a752e1b2e17d6810000001'
     , project: { name: 'test/project' }
     , test_exitcode: exitCode
     , started: new Date()
@@ -36,23 +40,13 @@ describe('Email Notifier', function () {
 
   it('should not break when no callback is set', function () {
     var job = createJob(0)
-      , context = createContext(
-          function (a, b, c, callback) {
-            callback()
-          }
-    , { always_notfiy: true }
-    )
+      , context = createContext([job], { always_notfiy: true })
     handler(job, context)
   })
 
   it('should send success email when always_notfiy is true and job exit code is zero', function (done) {
     var job = createJob(0)
-      , context = createContext(
-          function (a, b, c, callback) {
-            callback()
-          }
-    , { always_notfiy: true }
-    )
+      , context = createContext([job], { always_notfiy: true })
     handler(job, context, function (error, response) {
       expect(response.state).to.be('successSent')
       done()
@@ -61,12 +55,7 @@ describe('Email Notifier', function () {
 
   it('should send success email when always_notfiy is true and job exit code is > zero', function (done) {
     var job = createJob(1)
-      , context = createContext(
-          function (a, b, c, callback) {
-            callback()
-          }
-    , { always_notfiy: true }
-    )
+      , context = createContext([job], { always_notfiy: true })
     handler(job, context, function (error, response) {
       expect(response.state).to.be('failureSent')
       done()
@@ -75,12 +64,7 @@ describe('Email Notifier', function () {
 
   it('should send success email when always_notfiy is false and there is no previous job', function (done) {
     var job = createJob(0)
-      , context = createContext(
-          function (a, b, c, callback) {
-            callback()
-          }
-    , { always_notfiy: false }
-    )
+      , context = createContext([job], { always_notfiy: false })
     handler(job, context, function (error, response) {
       expect(response.state).to.be('successSent')
       done()
@@ -89,12 +73,7 @@ describe('Email Notifier', function () {
 
   it('should send success email when always_notfiy is false and job state has changed', function (done) {
     var job = createJob(0)
-      , context = createContext(
-          function (a, b, c, callback) {
-            callback(null, [ createJob(0), createJob(1) ])
-          }
-    , { always_notfiy: false }
-    )
+      , context = createContext([job, createJob(1)], { always_notfiy: false })
     handler(job, context, function (error, response) {
       expect(response.state).to.be('successSent')
       done()
@@ -103,12 +82,7 @@ describe('Email Notifier', function () {
 
   it('should not send any emails when job state has not changed (both failed)', function (done) {
     var job = createJob(1)
-      , context = createContext(
-          function (a, b, c, callback) {
-            callback(null, [ createJob(1), createJob(1) ])
-          }
-    , { always_notfiy: false }
-    )
+      , context = createContext([job, createJob(1)], { always_notfiy: false })
     handler(job, context, function (error, response) {
       expect(response.state).to.be('didNotSend')
       done()
@@ -117,12 +91,7 @@ describe('Email Notifier', function () {
 
   it('should not send any emails when job state has not changed (both failed, different codes)', function (done) {
     var job = createJob(1)
-      , context = createContext(
-          function (a, b, c, callback) {
-            callback(null, [ createJob(1), createJob(2) ])
-          }
-    , { always_notfiy: false }
-    )
+      , context = createContext([job, createJob(2)], { always_notfiy: false })
     handler(job, context, function (error, response) {
       expect(response.state).to.be('didNotSend')
       done()
@@ -131,12 +100,7 @@ describe('Email Notifier', function () {
 
   it('should not send any emails when job state has not changed (both successful)', function (done) {
     var job = createJob(0)
-      , context = createContext(
-          function (a, b, c, callback) {
-            callback(null, [ createJob(0), createJob(0) ])
-          }
-    , { always_notfiy: false }
-    )
+      , context = createContext([job, createJob(0)], { always_notfiy: false })
     handler(job, context, function (error, response) {
       expect(response.state).to.be('didNotSend')
       done()
