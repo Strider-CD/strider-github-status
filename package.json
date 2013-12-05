@@ -36,7 +36,7 @@
     "expect.js": "~0.2.0"
   },
   "dependencies": {
-    "strider-mailer": "git+ssh://git@github.com:microadam/strider-mailer.git",
+    "strider-mailer": "~0.0",
     "async": "~0.2.9",
     "underscore": "~1.5.2",
     "jade": "~0.35.0",
