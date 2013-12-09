@@ -1,6 +1,6 @@
 {
   "name": "strider-email-notifier",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Enables strider to email notifications based on certain events",
   "main": "webapp.js",
   "publishConfig": {
