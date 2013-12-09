@@ -107,4 +107,13 @@ describe('Email Notifier', function () {
     })
   })
 
+  it('should not crash when no config has been set', function (done) {
+    var job = createJob(0)
+      , context = createContext([job, createJob(0)])
+    handler(job, context, function (error, response) {
+      expect(response.state).to.be('didNotSend')
+      done()
+    })
+  })
+
 })
