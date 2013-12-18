@@ -31,12 +31,12 @@ module.exports = {
         } else {
           account = getAccount(creator, job.project)
         }
-        if (!account || account.accessToken) {
+        if (!account || !account.config.accessToken) {
           console.error('Account not found for', job.project.provider)
           debug(job.project.provider, creator.accounts, account)
           return
         }
-        token = account.accessToken
+        token = account.config.accessToken
         debug('Token', account, token)
         emitter.emit('plugin.github-status.started', job._id, projectName, token, job.plugin_data.github.pull_request)
         emitter.once('job.status.tested', function (jobId) {
