@@ -1,4 +1,5 @@
 var setStatus = require('./lib/handler')
+  , debug = require('debug')('strider-github-status')
 
 function jobStatus(job) {
   if (job.errored) return 'error'
@@ -6,6 +7,7 @@ function jobStatus(job) {
 }
 
 function getToken(models, projectName, done) {
+  debug('getting token', projectName)
   models.Project.findOne({name: projectName}, function (err, project) {
     if (err) return done(err)
     models.User.findById(project.creator, function (err, user) {
@@ -27,7 +29,10 @@ module.exports = {
   listen: function (io, context) {
     io.on('plugin.github-status.started', function (jobId, projectName, data) {
       getToken(context.models, projectName, function (err, token) {
-        if (err) return console.error('Failed to get access token', err.message)
+        if (err) {
+          debug('Failed to get access token', err.message)
+          return console.error('Failed to get access token', err.message)
+        }
         var url = context.config.server_name + '/' + projectName + '/job/' + jobId
         setStatus(token, url, data, 'pending')
       })
@@ -36,11 +41,14 @@ module.exports = {
     io.on('plugin.github-status.done', function (jobId, pluginConfig, data) {
       var onDoneAndSaved = function (job) {
         if (job._id.toString() !== jobId.toString()) return
-        console.log('yeah', job.project)
+        debug('plugin done')
 
         io.removeListener('job.doneAndSaved', onDoneAndSaved)
         getToken(context.models, job.project, function (err, token) {
-          if (err) return console.error('Failed to get access token', err.message)
+          if (err) {
+            debug('Failed to get access token', err.message, job.project)
+            return console.error('Failed to get access token', err.message)
+          }
           var url = context.config.server_name + '/' + job.project + '/job/' + jobId
           setStatus(token, url, data, jobStatus(job))
         })

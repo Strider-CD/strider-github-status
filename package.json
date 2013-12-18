@@ -21,7 +21,8 @@
   },
   "homepage": "https://github.com/Strider-CD/strider-github-status",
   "dependencies": {
-    "github": "~0.1.12"
+    "github": "~0.1.12",
+    "debug": "~0.7.4"
   },
   "publishConfig": {
     "registry": "http://registry.npmjs.org"
