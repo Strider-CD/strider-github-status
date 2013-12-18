@@ -1,0 +1,26 @@
+{
+  "name": "strider-github-status",
+  "version": "0.0.0",
+  "description": "Add build status indicators to pull requests in github",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Strider-CD/strider-github-status.git"
+  },
+  "keywords": [
+    "strider",
+    "github",
+    "pull-request",
+    "status",
+    "commit"
+  ],
+  "author": "Jared Forsyth <jared@jaredforsyth.com>",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/Strider-CD/strider-github-status/issues"
+  },
+  "homepage": "https://github.com/Strider-CD/strider-github-status"
+}
