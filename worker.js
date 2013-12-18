@@ -23,13 +23,20 @@ module.exports = {
         }
         var projectName = job.project.name
           , creator = job.project.creator
+          , account
           , token
         if (creator.account) {
           debug('Full account!')
-          token = creator.account(job.project.provider).accessToken
+          account = creator.account(job.project.provider)
         } else {
-          token = getAccount(creator, job.project).accessToken
+          account = getAccount(creator, job.project)
         }
+        if (!account || account.accessToken) {
+          console.error('Account not found for', job.project.provider)
+          debug(job.project.provider, user.accounts, account)
+          return
+        }
+        token = account.accessToken
         emitter.emit('plugin.github-status.started', job._id, projectName, token, job.plugin_data.github.pull_request)
         emitter.once('job.status.tested', function (jobId) {
           debug('job was tested', jobId)
