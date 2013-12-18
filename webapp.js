@@ -12,13 +12,16 @@ module.exports = {
       console.log('started', jobId)
     })
 
-    io.on('plugin.emailNotifier.send', function (jobId, pluginConfig) {
+    io.on('plugin.github-status.done', function (jobId, pluginConfig) {
       var onDoneAndSaved = function (job) {
+        console.log('doneandsaved', job)
+        /*
         if (job._id.toString() === jobId.toString()) {
           io.removeListener('job.doneAndSaved', onDoneAndSaved)
           context.pluginConfig = pluginConfig
           jobHandler(job, context, jobStatus(job))
         }
+        */
       }
       io.on('job.doneAndSaved', onDoneAndSaved)
     })
