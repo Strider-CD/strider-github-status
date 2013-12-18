@@ -39,7 +39,8 @@
     "id": "github-status",
     "title": "Github Status",
     "webapp": "webapp.js",
-    "worker": "worker.js"
+    "worker": "worker.js",
+    "icon": "icon.png"
   },
   "devDependencies": {
     "jshint": "~2.3.0",
