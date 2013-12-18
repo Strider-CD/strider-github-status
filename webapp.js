@@ -27,31 +27,19 @@ function getToken(models, projectName, done) {
 module.exports = {
   // global events
   listen: function (io, context) {
-    io.on('plugin.github-status.started', function (jobId, projectName, data) {
-      getToken(context.models, projectName, function (err, token) {
-        if (err) {
-          debug('Failed to get access token', err.message)
-          return console.error('Failed to get access token', err.message)
-        }
-        var url = context.config.server_name + '/' + projectName + '/job/' + jobId
-        setStatus(token, url, data, 'pending')
-      })
+    io.on('plugin.github-status.started', function (jobId, projectName, token, data) {
+      var url = context.config.server_name + '/' + projectName + '/job/' + jobId
+      setStatus(token, url, data, 'pending')
     })
 
-    io.on('plugin.github-status.done', function (jobId, pluginConfig, data) {
+    io.on('plugin.github-status.done', function (jobId, pluginConfig, token, data) {
       var onDoneAndSaved = function (job) {
         if (job._id.toString() !== jobId.toString()) return
         debug('plugin done')
 
         io.removeListener('job.doneAndSaved', onDoneAndSaved)
-        getToken(context.models, job.project, function (err, token) {
-          if (err) {
-            debug('Failed to get access token', err.message, job.project)
-            return console.error('Failed to get access token', err.message)
-          }
-          var url = context.config.server_name + '/' + job.project + '/job/' + jobId
-          setStatus(token, url, data, jobStatus(job))
-        })
+        var url = context.config.server_name + '/' + job.project + '/job/' + jobId
+        setStatus(token, url, data, jobStatus(job))
       }
       io.on('job.doneAndSaved', onDoneAndSaved)
     })
