@@ -37,6 +37,7 @@ module.exports = {
           return
         }
         token = account.accessToken
+        debug('Token', account, accessToken)
         emitter.emit('plugin.github-status.started', job._id, projectName, token, job.plugin_data.github.pull_request)
         emitter.once('job.status.tested', function (jobId) {
           debug('job was tested', jobId)

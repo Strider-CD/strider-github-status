@@ -28,17 +28,18 @@ module.exports = {
   // global events
   listen: function (io, context) {
     io.on('plugin.github-status.started', function (jobId, projectName, token, data) {
+      debug('got', jobId, projectName, token, data)
       var url = context.config.server_name + '/' + projectName + '/job/' + jobId
       setStatus(token, url, data, 'pending')
     })
 
-    io.on('plugin.github-status.done', function (jobId, pluginConfig, token, data) {
+    io.on('plugin.github-status.done', function (jobId, projectName, token, data) {
       var onDoneAndSaved = function (job) {
         if (job._id.toString() !== jobId.toString()) return
-        debug('plugin done')
+        debug('plugin done', jobId, projectName, token, data)
 
         io.removeListener('job.doneAndSaved', onDoneAndSaved)
-        var url = context.config.server_name + '/' + job.project + '/job/' + jobId
+        var url = context.config.server_name + '/' + projectName + '/job/' + jobId
         setStatus(token, url, data, jobStatus(job))
       }
       io.on('job.doneAndSaved', onDoneAndSaved)
