@@ -1,9 +1,4 @@
-## Strider Email Notifier
+## Strider Github Status
 
-This plugin enables email notifications to be sent on build success or failure.
+This gives you nice notifications on pull-requests that are tested, letting you know if the tests would pass or fail on the merged code.
 
-### Configuration Options
-
-By default, email notifications will only be sent when the status of the build changes. i.e when it moves from a successful to a failed state or from a failed to a successful state.
-
-You can change this by selecting "Always send notification emails" within the plugin options.
