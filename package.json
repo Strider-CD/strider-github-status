@@ -22,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/Strider-CD/strider-github-status/issues"
   },
-  "homepage": "https://github.com/Strider-CD/strider-github-status"
+  "homepage": "https://github.com/Strider-CD/strider-github-status",
+  "dependencies": {
+    "github": "~0.1.12"
+  }
 }
