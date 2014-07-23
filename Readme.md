@@ -4,4 +4,4 @@ This gives you nice notifications on pull-requests that are tested, letting you 
 
 ### Requirements
 
-This plugin depends on the latest changes to `strider-github`, so you need to install that straight from git, not npm, in your strider instance.
+This plugin depends on `strider-github`.
