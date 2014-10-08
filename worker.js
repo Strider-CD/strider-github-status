@@ -25,10 +25,15 @@ module.exports = {
     return callback(null, {
       listen: function (emitter) {
         debug('listening')
-        emitter.emit('plugin.github-status.started', job._id, projectName, token, job.plugin_data.github.pull_request)
+        var github_repo_data = {
+          user: job.project.provider.config.owner,
+          repo: job.project.provider.config.repo,
+          sha: job.plugin_data.github.pull_request.sha,
+        }
+        emitter.emit('plugin.github-status.started', job._id, projectName, token, github_repo_data)
         emitter.once('job.status.tested', function (jobId) {
           debug('job was tested', jobId)
-          emitter.emit('plugin.github-status.done', jobId, projectName, token, job.plugin_data.github.pull_request)
+          emitter.emit('plugin.github-status.done', jobId, projectName, token, github_repo_data)
         })
       }
     })
