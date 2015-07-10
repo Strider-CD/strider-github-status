@@ -14,16 +14,16 @@ function jobDescription(job) {
 
 module.exports = {
   config: {
-    pending.msg: String,
-    context: String,
-  }
+    pendingMsg: String,
+    context: String
+  },
 
   // global events
-  listen: function (io, context) {
+  listen: function (io, context, config) {
     io.on('plugin.github-status.started', function (jobId, projectName, token, data) {
       debug('got', jobId, projectName, token, data)
       var url = context.config.server_name + '/' + projectName + '/job/' + jobId
-      setStatus(token, url, data, 'pending', config.pending_msg, config.context)
+      setStatus(token, url, data, 'pending', config.pendingMsg, config.context)
     })
 
     io.on('plugin.github-status.done', function (jobId, projectName, token, data) {
