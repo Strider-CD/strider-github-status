@@ -1,6 +1,6 @@
 {
   "name": "strider-github-status",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Add build status indicators to pull requests in github",
   "main": "index.js",
   "repository": {
@@ -21,8 +21,8 @@
   },
   "homepage": "https://github.com/Strider-CD/strider-github-status",
   "dependencies": {
-    "github": "~0.1.12",
-    "debug": "~0.7.4"
+    "github": "^0.2.4",
+    "debug": "^2.2.0"
   },
   "publishConfig": {
     "registry": "http://registry.npmjs.org"
