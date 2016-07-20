@@ -14,8 +14,11 @@
     "status",
     "commit"
   ],
+  "engines": {
+    "node": ">=4.2"
+  },
   "author": "Jared Forsyth <jared@jaredforsyth.com>",
-  "license": "BSD",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/Strider-CD/strider-github-status/issues"
   },
