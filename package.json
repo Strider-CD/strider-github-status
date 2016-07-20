@@ -28,11 +28,11 @@
     "registry": "http://registry.npmjs.org"
   },
   "scripts": {
-    "lint": "./node_modules/.bin/jshint .",
-    "test-only": "./node_modules/.bin/_mocha -- -R spec",
-    "pretest": "npm run-script lint",
-    "test": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -- -R spec",
-    "posttest": "./node_modules/.bin/istanbul check-coverage",
+    "lint": "eslint *.js lib",
+    "test-only": "mocha -- -R spec",
+    "pretest": "npm run lint",
+    "test": "istanbul cover ./node_modules/mocha/bin/_mocha -- -R spec",
+    "posttest": "istanbul check-coverage",
     "prepublish": "npm test && npm prune"
   },
   "strider": {
@@ -44,9 +44,10 @@
     "icon": "icon.png"
   },
   "devDependencies": {
-    "jshint": "~2.3.0",
-    "mocha": "~1.13.0",
+    "eslint": "^3.1.1",
     "expect.js": "~0.2.0",
-    "istanbul": "~0.2.0"
+    "istanbul": "~0.2.0",
+    "jshint": "~2.3.0",
+    "mocha": "~1.13.0"
   }
 }
