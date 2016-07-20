@@ -9,10 +9,10 @@ module.exports = {
     } else {
       debug('found pr!', job.plugin_data.github.pull_request);
     }
-    var projectName = job.project.name
-      , creator = job.project.creator
-      , account
-      , token;
+    var projectName = job.project.name;
+    var creator = job.project.creator;
+    var account;
+    var token;
     account = creator.account(job.project.provider);
     if (!account || !account.config.accessToken) {
       console.error('Account not found for', job.project.provider);
