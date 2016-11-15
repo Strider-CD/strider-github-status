@@ -17,15 +17,13 @@ function jobInfo(job, config) {
 
 module.exports = {
   config: {
-    'github-status': {
-      messages: {
-        pending: {type: String, default: 'Strider test in progress'},
-        success: {type: String, default: 'Strider tests succeeded'},
-        failure: {type: String, default: 'Strider tests failed'},
-        error: {type: String, default: 'Strider tests errored'},
-      },
-      context: {type: String, default: 'default'},
-    }
+    messages: {
+      pending: {type: String, default: 'Strider test in progress'},
+      success: {type: String, default: 'Strider tests succeeded'},
+      failure: {type: String, default: 'Strider tests failed'},
+      error: {type: String, default: 'Strider tests errored'},
+    },
+    context: {type: String, default: 'ci/strider'},
   },
   // global events
   listen: function (io, context) {
