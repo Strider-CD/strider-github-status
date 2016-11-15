@@ -1,0 +1,27 @@
+<div id="template" class="well">
+    <h2>Github Status</h2>
+    <br/>
+    <br/>
+    <h3 class="help-text">
+        Configure context for status messages
+    </h3>
+    <div>context :</div>
+    <input type="text" class="span12" ui-refresh="selectedTab" ng-model="config.context" />
+    <br/>
+    <br/>
+    <h3 class="help-text">
+        Configure description for each status message
+    </h3>
+    <div>pending :</div>
+    <input type="text" class="span12" ui-refresh="selectedTab" ng-model="config.messages.pending" />
+    <br/>
+    <div>success :</div>
+    <input type="text" class="span12" ui-refresh="selectedTab" ng-model="config.messages.success" />
+    <br/>
+    <div>failure :</div>
+    <input type="text" class="span12" ui-refresh="selectedTab" ng-model="config.messages.failure" />
+    <br/>
+    <div>error :</div>
+    <input type="text" class="span12" ui-refresh="selectedTab" ng-model="config.messages.error" />
+    <button ng-click="save()" class="btn btn-primary">Save</button>
+</div>
