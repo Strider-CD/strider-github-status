@@ -30,10 +30,10 @@ module.exports = {
           repo: job.project.provider.config.repo,
           sha: job.plugin_data.github.pull_request.sha
         };
-        emitter.emit('plugin.github-status.started', job._id, projectName, token, github_repo_data);
+        emitter.emit('plugin.github-status.started', job._id, projectName, token, github_repo_data, config);
         emitter.once('job.status.tested', function (jobId) {
           debug('job was tested', jobId);
-          emitter.emit('plugin.github-status.done', jobId, projectName, token, github_repo_data);
+          emitter.emit('plugin.github-status.done', jobId, projectName, token, github_repo_data, config);
         });
       }
     });

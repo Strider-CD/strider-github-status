@@ -1,0 +1,42 @@
+<h2>
+  Github Status
+  <button ng-click="save()" class="btn btn-primary pull-right">Save</button>
+</h2>
+
+<div class="form-group">
+  <h4>Context for status message</h4>
+
+  <input id="github-status-context" type="text" ng-model="config.context">
+  <p class="help-text">
+    Status message context. Default it "ci/strider".
+  </p>
+</div>
+
+<div class="form-group">
+  <h4>Description of status</h4>
+
+  <label for="github-status-messages-pending" class="bold-label">Pending:</label>
+  <input id="github-status-messages-pending" type="text" ng-model="config.messages.pending">
+  <p class="help-text">
+    Description for "pending" status. Default it "Strider test in progress".
+  </p>
+
+  <label for="github-status-messages-success" class="bold-label">Success:</label>
+  <input id="github-status-messages-success" type="text" ng-model="config.messages.success">
+  <p class="help-text">
+    Description for "success" status. Default it "Strider tests succeeded".
+  </p>
+
+  <label for="github-status-messages-failure" class="bold-label">Failure:</label>
+  <input id="github-status-messages-failure" type="text" ng-model="config.messages.failure">
+  <p class="help-text">
+    Description for "failure" status. Default it "Strider tests failed".
+  </p>
+
+  <label for="github-status-messages-error" class="bold-label">Error:</label>
+  <input id="github-status-messages-error" type="text" ng-model="config.messages.error">
+  <p class="help-text">
+    Description for "error" status. Default it "Strider tests errored".
+  </p>
+</div>
+<button ng-click="save()" class="btn btn-primary pull-right">Save</button>
