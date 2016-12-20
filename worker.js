@@ -2,12 +2,17 @@ var debug = require('debug')('strider-github-status');
 
 module.exports = {
   init: function (config, job, context, callback) {
+    var sha;
     debug('initing', job._id, job.plugin_data);
-    if (!job.plugin_data || !job.plugin_data.github || !job.plugin_data.github.pull_request) {
-      debug('No github PR data', job.plugin_data, job);
-      return callback(null, {});
-    } else {
+    if (job.plugin_data && job.plugin_data.github && job.plugin_data.github.pull_request) {
       debug('found pr!', job.plugin_data.github.pull_request);
+      sha = job.plugin_data.github.pull_request.sha;
+    } else if (job.trigger.type === 'commit') {
+      debug('found commit!', job.ref);
+      sha = job.ref.id;
+    } else {
+      debug('No github PR data nor github commit', job.plugin_data, job);
+      return callback(null, {});
     }
     var projectName = job.project.name;
     var creator = job.project.creator;
@@ -28,7 +33,7 @@ module.exports = {
         var github_repo_data = {
           user: job.project.provider.config.owner,
           repo: job.project.provider.config.repo,
-          sha: job.plugin_data.github.pull_request.sha
+          sha: sha
         };
         emitter.emit('plugin.github-status.started', job._id, projectName, token, github_repo_data, config);
         emitter.once('job.status.tested', function (jobId) {
