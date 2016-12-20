@@ -1,7 +1,7 @@
 {
   "name": "strider-github-status",
   "version": "2.0.0",
-  "description": "Add build status indicators to pull requests in github",
+  "description": "Add build status indicators to pull requests and commits in github",
   "main": "index.js",
   "repository": {
     "type": "git",
