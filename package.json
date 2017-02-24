@@ -24,8 +24,8 @@
   },
   "homepage": "https://github.com/Strider-CD/strider-github-status",
   "dependencies": {
-    "github": "~0.2.4",
-    "debug": "~0.7.4"
+    "github": "~9.0.0",
+    "debug": "~2.6.1"
   },
   "publishConfig": {
     "registry": "http://registry.npmjs.org"
@@ -51,9 +51,9 @@
   },
   "devDependencies": {
     "eslint": "^3.1.1",
-    "expect.js": "~0.2.0",
-    "istanbul": "~0.2.0",
-    "jshint": "~2.3.0",
-    "mocha": "~1.13.0"
+    "expect.js": "~0.3.1",
+    "istanbul": "~0.4.5",
+    "jshint": "~2.9.4",
+    "mocha": "~3.2.0"
   }
 }
