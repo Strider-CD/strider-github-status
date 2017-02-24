@@ -1,5 +1,7 @@
 ## Strider Github Status
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/Strider-CD/strider-github-status.svg)](https://greenkeeper.io/)
+
 This gives you nice notifications on pull-requests and commits that are tested, letting you know if the tests would pass or fail on the merged code.
 
 ### Requirements
